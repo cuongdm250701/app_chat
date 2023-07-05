@@ -1,0 +1,5 @@
+<h5> Add comment </h5>
+<%= form_for @comment, url: comments_path, method: :post do |f| %>
+    <%= f.text_area :content, placeholder: 'Enter your comment' %>
+    <%= f.submit "Submit" %>
+<% end %>

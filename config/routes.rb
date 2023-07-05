@@ -10,4 +10,6 @@ Rails.application.routes.draw do
     post "signin" => "users/sessions#create"
     delete "signout" => "users/sessions#destroy"
   end
+
+  resources :comments
 end

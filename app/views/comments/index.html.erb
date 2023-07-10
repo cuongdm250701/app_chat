@@ -1,18 +1,26 @@
 <h1> Chat here </h1>
 
-<div>
-    <% @comments.each do |comment| %>
-        <% if comment.user_id == current_user.id %>
-            <p class="my-content"> <%= comment.content %> </p>
-        <% else %>
-            <p class="other-content"><%= comment.content %> </p>
+<div class='container'>
+    <div class='comments'>
+        <% @comments.each do |comment| %>
+            <% if comment.user_id == current_user.id %>
+                <h6 class="myself"> username: <%= comment.user.username %> </h6>
+                <p class="my-content"> 
+                    <%= comment.content %> 
+                </p>
+            <% else %>
+                <h6 class="other"> username: <%= comment.user.username %> </h6>
+                <p class="other-content">
+                    <%= comment.content %> 
+                </p>
+            <% end %>
+        <% end %>  
+    </div>
+    <div>
+        <h5> Add comment </h5>
+        <%= form_for @comment, url: comments_path, method: :post do |f| %>
+            <%= f.text_area :content, placeholder: 'Enter your comment', class: 'textarea' %>
+            <%= f.submit "Submit" %>
         <% end %>
-    <% end %>  
-</div>
-<div>
-    <h5> Add comment </h5>
-    <%= form_for @comment, url: comments_path, method: :post do |f| %>
-        <%= f.text_area :content, placeholder: 'Enter your comment', class: 'textarea' %>
-        <%= f.submit "Submit" %>
-    <% end %>
+    </div>
 </div>

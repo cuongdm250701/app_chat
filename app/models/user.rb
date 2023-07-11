@@ -1,5 +1,9 @@
 class User < ApplicationRecord
   has_many :comments
+  has_and_belongs_to_many :groups
+
+  enum role: { admin: 1, customer: 2 }
+
   attr_accessor :login
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

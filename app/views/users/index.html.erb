@@ -1,0 +1,9 @@
+<%= link_to "Back to Home", root_path %>
+<h1>List of Users</h1>
+<div>
+    <ul>
+        <% @users.each do |user| %>
+            <li><%= user.username %></li>
+        <% end %>
+    </ul>
+</div>

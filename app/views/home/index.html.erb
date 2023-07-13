@@ -1,7 +1,13 @@
-<h1>Home</h1>
+<div class='header'>
+    <h1>Home</h1>
+    <%= link_to "Log out", destroy_user_session_path, method: :delete, class:"btn-log-out" %>
+</div>
+
 <p>List Service</p>
 
-<%= link_to "App Chat", comments_path %>
+<%= link_to "List User", users_path %>
+<br/>
+<%= link_to "List Group", groups_path %>
 <br/>
 
-<%= link_to "Log out", destroy_user_session_path, method: :delete, class:"" %>
+

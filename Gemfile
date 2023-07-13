@@ -31,6 +31,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 #Gemfile
 gem "devise", "~> 4.1"
 
+gem 'cancancan', '~> 3.3.0'
+
 gem 'pry-rails', :group => :development
 
 group :development, :test do

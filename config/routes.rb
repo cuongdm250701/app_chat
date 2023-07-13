@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root to: 'home#index'
+  get 'users', to: 'users#index', as: 'users'
   get "home" => 'home#index'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -10,6 +11,6 @@ Rails.application.routes.draw do
     post "signin" => "users/sessions#create"
     delete "signout" => "users/sessions#destroy"
   end
-
   resources :comments
+  resources :groups
 end

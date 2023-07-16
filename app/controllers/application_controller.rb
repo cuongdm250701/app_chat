@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
     before_action :configure_permitted_parameters, if: :devise_controller?
 
    rescue_from CanCan::AccessDenied do |execption|
-       redirect_to root_path, alert: "Bạn không có quyền truy cập vào tài nguyên này"
+       redirect_to root_path, alert: "Permission denied"
    end
    
     protected

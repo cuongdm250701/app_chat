@@ -10,6 +10,7 @@ class Ability
       else
         can :create, User
         can :read, Group
+        can :add_comments, Group
     end
    end
 end

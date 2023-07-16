@@ -1,3 +1,33 @@
+
+
 <%= link_to "Back to Home", root_path %>
-<h1>List Group</h1>
-<p>updating....</p>
+<div class='header-groups'>
+    <h1>List Group</h1>
+    <% if can? :create, Group %>
+       <%= link_to "New Group", new_group_path %>
+    <% end %>
+</div>
+
+<div>
+    <ul>
+        <% if !@groups.blank? %>
+            <% @groups.each do |group| %>
+                <li class='group-link' data-group-id="<%= group.id %>">
+                    <%= link_to "#{group.name}", group_path(group.id) %>
+                    <% if current_user&.admin? %>
+                        <%= link_to "Edit", edit_group_path(group.id) %>
+                        <%= 
+                            link_to "Delete", group_path(group.id), 
+                            method: :delete, 
+                            data: { confirm: "Are you sure you want to delete this group?" } 
+                        %>
+                        <%= link_to "Add user", add_users_group_path(group.id) %> 
+                    <% end %>
+                </li>
+            <% end %>
+        <% else %>
+             <h4> You don't have any groups </h4>   
+        <% end %>
+    </ul>
+</div>
+

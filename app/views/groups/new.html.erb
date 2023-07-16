@@ -1,0 +1,6 @@
+<%= link_to "Back to list groups", groups_path %>
+<h5> Add Group </h5>
+<%= form_for @group, url: groups_path, method: :post do |f| %>
+    <%= f.text_field :name, placeholder: 'Enter your group' %>
+    <%= f.submit "Submit" %>
+<% end %>

@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  has_many :comments
-  has_and_belongs_to_many :groups
+  has_many :comments, dependent: :destroy
+  has_and_belongs_to_many :groups, dependent: :destroy
 
   enum role: { admin: 1, customer: 2 }
 

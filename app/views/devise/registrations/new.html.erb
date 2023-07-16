@@ -1,4 +1,11 @@
-<h2>Sign up</h2>
+<% if current_user&.admin? %>
+  <%= link_to "Back to list users", users_path %>
+<% end %>
+<% if current_user&.admin? %>
+  <h1> Create User </h1>
+<% else %>  
+  <h2>Sign up</h2>
+<% end %>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
@@ -27,8 +34,15 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <% if current_user&.admin? %>
+      <%= f.submit "Create" %>
+    <% else %>
+      <%= f.submit "Sign up" %>
+    <% end %>
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<% if !current_user&.admin? %>
+  <%= render "devise/shared/links" %>
+<% end %>
+

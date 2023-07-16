@@ -1,3 +1,49 @@
 // Place all the styles related to the Groups controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.header-groups {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.my-content {
+    /* background-color: black; */
+    color: #0a6beb;
+    display: flex;
+    justify-content: end;
+    padding-right: 30px;
+  }
+  .myself {
+    color: red;
+    display: flex;
+    justify-content: end;
+    padding-right: 30px;
+  }
+  
+  .other-content {
+    color: #1deb0a;
+    display: flex;
+    justify-content: start;
+    padding-left: 30px
+  }
+
+  .other {
+    color: red;
+    display: flex;
+    justify-content: start;
+    padding-left: 30px
+  }
+  
+  .textarea {
+    width: 99%;
+    height: 91px;
+    resize: none;
+  }
+
+
+  .comments {
+    min-height: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+  }

@@ -1,0 +1,48 @@
+<%= link_to "Back to List of Group", groups_path %>
+<h1 class="header-group-chat" data-group-id="<%= @group_id %>">Group Chat</h1>
+
+  <div class='comments'>
+    <% @comments.each do |comment| %>
+            <% if comment.user_id == current_user.id %>
+                    <h6 class="myself"> username: <%= comment.user.username %> </h6>
+                    <p class="my-content"> 
+                        <%= comment.content %> 
+                    </p>
+            <% else %>
+                    <h6 class="other"> username: <%= comment.user.username %> </h6>
+                    <p class="other-content">
+                        <%= comment.content %> 
+                    </p>
+            <% end %>
+        <% end %>
+    </div>
+    <div>
+        <h5> Add comment </h5>
+        <%= form_for @comment, url: add_comments_group_path, method: :post, html: { id: 'form-comment' } do |f| %>
+            <%= f.text_area :content, placeholder: 'Enter your comment', class: 'textarea' %>
+            <%= f.submit "Submit" %>
+        <% end %>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var myForm = document.getElementById('form-comment');
+      
+            myForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+      
+                // clear value input
+                var textAreaElements = myForm.querySelectorAll('textarea');
+                textAreaElements.forEach(function(textArea) {
+                textArea.value = '';
+            });
+      
+            // enable button submit
+            var submitButton = myForm.querySelector('input[type="submit"]');
+
+            console.log('submitButton', submitButton) 
+            submitButton.disabled = true;
+        });
+      });
+    </script>
+    

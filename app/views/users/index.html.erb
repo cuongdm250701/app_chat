@@ -6,6 +6,14 @@
     <% end %>
 </div>
 <div>
+    <%= search_form_for @q do |f| %>
+        <%= f.label :username_or_email %>
+        <%= f.search_field :username_or_email_cont %>
+
+        <%= f.submit "Search!" %>
+    <% end %>
+</div>
+<div>
     <ul>
         <% @users.each do |user| %>
             <li>
@@ -22,5 +30,7 @@
                 <% end %>
             </li>
         <% end %>
+        <%= paginate @users %>
     </ul>
+ 
 </div>

@@ -9,6 +9,13 @@
 </div>
 
 <div>
+    <div>
+        <%= search_form_for @q do |f| %>
+            <%= f.label :group_name %>
+            <%= f.search_field :name_cont %>
+            <%= f.submit "Search!" %>
+        <% end %>
+    </div>
     <ul>
         <% if !@groups.blank? %>
             <% @groups.each do |group| %>
@@ -28,6 +35,7 @@
         <% else %>
              <h4> You don't have any groups </h4>   
         <% end %>
+        <%= paginate @groups %>
     </ul>
 </div>
 

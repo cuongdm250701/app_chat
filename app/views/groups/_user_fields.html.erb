@@ -1,0 +1,11 @@
+<div class="nested-fields">
+  <%= f.label :username, class: 'fields-create' %>
+  <%= f.text_field :username %>
+  <%= f.label :email, class: 'fields-create' %>
+  <%= f.text_field :email %>
+  <%= f.label :password, class: 'fields-create' %>
+  <%= f.password_field :password %>
+  <%= f.label :password_confirmation, 'Confirm Password', class: 'fields-create' %>
+  <%= f.password_field :password_confirmation %>
+  <%= link_to_remove_association "Remove User", f %>
+</div>

@@ -33,6 +33,10 @@ gem "devise", "~> 4.1"
 
 gem 'cancancan', '~> 3.3.0'
 
+gem 'ransack'
+
+gem 'kaminari'
+gem "cocoon"
 gem 'pry-rails', :group => :development
 
 group :development, :test do

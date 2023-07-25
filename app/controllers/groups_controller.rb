@@ -4,14 +4,17 @@ class GroupsController < ApplicationController
   # GET
   def index
     if current_user.role == 'admin'
-      @groups = Group.all
+      @q = Group.ransack(params[:q])
+      @groups = @q.result().page(params[:page]).per(5)
     else
-      @groups = current_user.groups ## ???
+      @q = current_user.groups.ransack(params[:q])
+      @groups = @q.result().page(params[:page]).per(5)
     end
   end
   # CREATE
   def new
     @group = Group.new
+    1.times { @group.users.build }
   end
 
   def create
@@ -19,7 +22,7 @@ class GroupsController < ApplicationController
     if @group.save
       redirect_to groups_path, notice: "Group was successfully created."
     else
-      render :new
+      redirect_to new_group_path, notice: "Error when create !"
     end
   end
   # UPDATE
@@ -37,6 +40,7 @@ class GroupsController < ApplicationController
   end
   # DELETE
   def destroy
+    
     @group = Group.find(params[:id])
     @group.destroy
     redirect_to groups_path, notice: 'Group was successfully deleted.'
@@ -45,8 +49,9 @@ class GroupsController < ApplicationController
   # ADD USER TO GROUP
 
   def add_users
+    @q = User.ransack(params[:q])
     @group = Group.find(params[:id])
-    @users = User.all
+    @users = @q.result()
   end
 
   def add_members
@@ -98,5 +103,9 @@ class GroupsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:content)
+  end
+
+  def group_params
+    params.require(:group).permit(:name, users_attributes: [:id, :username, :email, :password, :password_confirmation, :_destroy])
   end
 end

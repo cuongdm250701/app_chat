@@ -1,5 +1,12 @@
 <%= link_to "Back to list group", groups_path %>
 <h1>Add Users to Group</h1>
+    <div>
+        <%= search_form_for @q, url: add_users_group_path(@group) do |f| %>
+            <%= f.label :username_or_email %>
+            <%= f.search_field :username_or_email_cont %>
+            <%= f.submit "Search!" %>
+        <% end %>
+    </div>
 
 <%= form_for @group, url: add_members_group_path(@group), method: :post do |f| %>
   <% @users.each do |user| %>

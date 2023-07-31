@@ -19,7 +19,8 @@
             <li>
                 <%= user.username %>
                 <% if user.id == current_user.id %>
-                 <%=link_to "Edit", edit_user_registration_path %>
+                 <%=link_to "Edit", edit_user_registration_path, method: :put, data: {confirm: "This feature is in development
+                 "} %>
                 <% end %>
                 <% if user.id != current_user.id %>
                     <%= 

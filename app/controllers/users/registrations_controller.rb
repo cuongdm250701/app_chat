@@ -1,17 +1,30 @@
-# frozen_string_literal: true
-
 class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
+
+  def new
+    if current_user&.admin?
+      @groups = Group.all
+    end
+    super
+  end
+
   def create
-    super do |user|
-      if current_user&.admin?
-        if user.persisted? 
+    if current_user&.admin?
+      ActiveRecord::Base.transaction do
+        @user = User.new(sign_up_params)
+        if @user.save
+          if params[:user][:group_ids].present?
+            group_ids = params[:user][:group_ids]
+            @user.groups << Group.where(id: group_ids)
+          end
           redirect_to users_path, notice: "User was successfully created."
         else
+          @groups = Group.all
           render :new
         end
-        return
       end
+    else 
+      super
     end
   end
 

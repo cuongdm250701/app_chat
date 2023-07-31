@@ -5,5 +5,16 @@
 <%= form_for @group, url: group_path(@group), method: :put do |f| %>
   <%= f.text_field :name %>
 
+  <!-- Select User -->
+  <div>
+    <%= f.label :Select_users %> <br/>
+    <% @users.each do |user| %>
+        <div>
+          <%= check_box_tag "user_ids[]", user.id, @group.users.include?(user) %>
+          <%= label_tag user.username %>
+        </div>
+    <% end %>
+  </div>
+
   <%= f.submit "Update Group" %>
 <% end %>

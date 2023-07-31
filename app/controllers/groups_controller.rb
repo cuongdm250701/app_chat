@@ -28,14 +28,24 @@ class GroupsController < ApplicationController
   # UPDATE
   def edit
     @group = Group.find(params[:id])
+    @users = User.where.not(role: :admin)
   end
 
   def update
-    @group = Group.find(params[:id])
-    if @group.update(group_params)
-      redirect_to groups_path, notice: "Group was successfully update."
-    else
-      render :edit
+    ActiveRecord::Base.transaction do
+      if Group.check_amount_user params[:user_ids]
+        @group = Group.find(params[:id])
+        @group.users.destroy_all
+        if @group.update(group_params)
+          user_ids = params[:user_ids]
+          @group.users << User.where(id: user_ids)
+          redirect_to edit_group_path(params[:id]), notice: "Group was successfully update."
+        else
+          render :edit
+        end
+      else
+        redirect_to edit_group_path(params[:id]), notice: "Group can not more than 5 user"
+      end
     end
   end
   # DELETE

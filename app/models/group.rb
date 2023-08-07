@@ -1,7 +1,8 @@
 class Group < ApplicationRecord
     has_and_belongs_to_many :users, dependent: :destroy
     has_many :comments, dependent: :destroy
-    accepts_nested_attributes_for :users, allow_destroy: true
+    has_many :posts, dependent: :destroy
+    accepts_nested_attributes_for :users, allow_destroy: true, reject_if: :all_blank
 
     validates :name, uniqueness: true
     validate :limit_user, on: :create
@@ -37,5 +38,14 @@ class Group < ApplicationRecord
             errors.add(:users, 'can not add more than 5 user')
         end
     end
+
+    # Sử dụng khi muốn check một số field cho phép rỗng mà vẫn muốn lưu cùng thằng cha
+    # Mỗi lần gọi method này thì dữ liệu trong nested attributes
+    # sẽ được truyền vào tham số attibutes để check dữ liệu
+    # Tạo bao nhiêu user thì method này được gọi bấy nhiêu lần
+    # def should_reject_user? attributes
+    #     attributes[:username]
+    #     return false
+    # end
 
 end

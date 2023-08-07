@@ -1,0 +1,14 @@
+<%= link_to "Back to list groups", groups_path %>
+<h5> Create Posts </h5>
+
+<div>    
+    <%= form_for @post, url: group_posts_path, method: :post do |f| %>
+        <div class='title-post'>    
+            <%= f.text_field :title, placeholder: 'Enter your title' %>
+        </div>
+        <div class='description-post'>
+            <%= f.text_area :description, placeholder: 'Enter your description', class: 'content-description' %>
+        </div>
+        <%= f.submit "Submit" %>
+    <% end %>
+</div>

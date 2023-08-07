@@ -11,6 +11,8 @@ class Ability
         can :create, User
         can :read, Group
         can :add_comments, Group
+        can :read, Post
+        can :add_comments, Post
     end
    end
 end

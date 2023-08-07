@@ -1,0 +1,30 @@
+<div class=''>
+    <div>
+        <%= link_to "Back to group chat", group_path(params[:group_id]) %>
+    </div>
+
+    <div class='field-search-post'>
+        <%= search_form_for @q, url: group_posts_path(params[:group_id]) do |f| %>
+            <%= f.search_field :title_or_description_cont, placeholder: 'Enter your title or description' %>
+            <%= f.submit "Search!" %>
+        <% end %>
+    </div>
+
+    <ul>
+        <% @posts.each do |post| %>
+            <li class=""> 
+                <%= link_to "#{post.title}", group_post_path(params[:group_id], post.id) %>
+                <% if current_user&.admin? %>
+                    <%= link_to "Edit", edit_group_post_path(params[:group_id], post.id) %>
+                    <%= 
+                    link_to "Delete", group_post_path(params[:group_id], post.id),
+                    method: :delete, 
+                    data: { confirm: "Are you sure you want to delete this post?" } 
+                    %>
+                <% end %>
+            </li>
+        <% end %>
+
+        <%= paginate @posts %>
+    </ul>
+</div>

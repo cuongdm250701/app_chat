@@ -28,7 +28,8 @@
                             method: :delete, 
                             data: { confirm: "Are you sure you want to delete this group?" } 
                         %>
-                        <%= link_to "Add user", add_users_group_path(group.id) %> 
+                        <%= link_to "Add user", add_users_group_path(group.id) %>
+                        <%= link_to "Create Post", new_group_post_path(group.id) %>
                     <% end %>
                 </li>
             <% end %>

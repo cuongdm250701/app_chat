@@ -12,11 +12,17 @@ Rails.application.routes.draw do
     delete "signout" => "users/sessions#destroy"
   end
   resources :comments
+
   resources :groups do
     member do
       get 'add_users'
       post 'add_members'
       post 'add_comments'
+    end
+    resources :posts do
+      member do
+        post 'add_comments'
+      end
     end
   end
 end

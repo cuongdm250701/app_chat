@@ -1,0 +1,30 @@
+// Place all the styles related to the Posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.title-post {
+    width: 100%;
+}
+
+.description-post {
+    margin-top: 10px;
+}
+.content-description {
+
+    width: 99%;
+    height: 91px;
+    resize: none;
+}
+.field-search-post {
+    margin-top: 20px;
+}
+
+.comment-posts {
+    max-height: 400px; 
+}
+
+.header-post-comment {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}

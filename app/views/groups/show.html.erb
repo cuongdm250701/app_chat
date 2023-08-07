@@ -1,5 +1,12 @@
 <%= link_to "Back to List of Group", groups_path %>
-<h1 class="header-group-chat" data-group-id="<%= @group_id %>">Group Chat</h1>
+<div class='header-group-chat-wrapper'> 
+    <h1 class="header-group-chat" data-group-id="<%= @group_id %>">
+        Group Chat
+    </h1>
+    <div>
+        <%= link_to "Review Group", group_posts_path(@group_id) %>
+    </div>
+</div>
 
   <div class='comments'>
     <% @comments.each do |comment| %>
@@ -24,25 +31,4 @@
         <% end %>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var myForm = document.getElementById('form-comment');
-      
-            myForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-      
-                // clear value input
-                var textAreaElements = myForm.querySelectorAll('textarea');
-                textAreaElements.forEach(function(textArea) {
-                textArea.value = '';
-            });
-      
-            // enable button submit
-            var submitButton = myForm.querySelector('input[type="submit"]');
-
-            console.log('submitButton', submitButton) 
-            submitButton.disabled = true;
-        });
-      });
-    </script>
     

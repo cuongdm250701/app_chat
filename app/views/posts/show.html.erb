@@ -1,0 +1,29 @@
+<%= link_to "Back to List of Post", group_posts_path(params[:group_id]) %>
+
+<div>
+     <h1> <%= @post.title %> </h1>
+     <p> <%= @post.description %> </p>
+</div>
+
+<div>
+    <div class="header-post-comment">
+        <h4> Comments </h4>
+        <%= link_to 'Export file', group_post_path(format: :xlsx), target: :_blank %>
+    </div>
+    <div class="comment-posts">
+        <% @comment_posts.each do |comment_post| %>
+            <h6 class="other"> username: <%= comment_post.user.username %> </h6>
+                <p class="other-content">
+                    <%= comment_post.content %> 
+                </p>
+        <% end %>
+    </div>
+
+    <div>
+        <h5> Add comment </h5>
+        <%= form_for @comment_post, url: add_comments_group_post_path(params[:group_id], params[:id]), method: :post, html: { id: 'form-comment' } do |f| %>
+            <%= f.text_field :content, placeholder: 'Enter your comment' %>
+            <%= f.submit "Submit" %>
+        <% end %>
+    </div>
+</div>

@@ -37,6 +37,8 @@ gem 'ransack'
 
 gem 'kaminari'
 gem "cocoon"
+gem 'caxlsx'
+gem 'caxlsx_rails'
 gem 'pry-rails', :group => :development
 
 group :development, :test do

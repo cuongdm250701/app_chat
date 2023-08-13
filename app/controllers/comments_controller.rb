@@ -2,7 +2,6 @@ class CommentsController < ApplicationController
     before_action :authenticate_user!
 
     def index
-        # binding.pry
         @comments = Comment.includes(:user).all
         @comment = Comment.new
     end

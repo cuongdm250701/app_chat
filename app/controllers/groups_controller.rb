@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
+  before_action :find_group, only: [:edit, :update, :destroy, :add_users, :show, :add_comments]
   load_and_authorize_resource
   # GET
   def index
@@ -27,14 +28,12 @@ class GroupsController < ApplicationController
   end
   # UPDATE
   def edit
-    @group = Group.find(params[:id])
     @users = User.where.not(role: :admin)
   end
 
   def update
     ActiveRecord::Base.transaction do
       if Group.check_amount_user params[:user_ids]
-        @group = Group.find(params[:id])
         @group.users.destroy_all
         if @group.update(group_params)
           user_ids = params[:user_ids]
@@ -50,8 +49,6 @@ class GroupsController < ApplicationController
   end
   # DELETE
   def destroy
-    
-    @group = Group.find(params[:id])
     @group.destroy
     redirect_to groups_path, notice: 'Group was successfully deleted.'
   end
@@ -60,12 +57,10 @@ class GroupsController < ApplicationController
 
   def add_users
     @q = User.ransack(params[:q])
-    @group = Group.find(params[:id])
     @users = @q.result()
   end
 
   def add_members
-    @group = Group.find(params[:id])
     user_ids = params[:user_ids]
 
     existing_users = @group.users.where(id: user_ids)
@@ -79,13 +74,11 @@ class GroupsController < ApplicationController
   # CHAT GROUP
   def show
     @group_id = params[:id]
-    @group = Group.find(params[:id])
     @comments = @group.comments.order(created_at: :asc)
     @comment = Comment.new
   end
 
   def add_comments
-    @group = Group.find(params[:id])
     @comment = @group.comments.build(comment_params)
     @comment.user = current_user
     if @comment.save
@@ -98,7 +91,6 @@ class GroupsController < ApplicationController
           }
       )
       flash[:notice] = 'Comment created successfully. '
-      # redirect_to group_path(@group.id), notice: 'Comment created successfully.'
     else
       render :new 
     end
@@ -117,5 +109,9 @@ class GroupsController < ApplicationController
 
   def group_params
     params.require(:group).permit(:name, users_attributes: [:id, :username, :email, :password, :password_confirmation, :_destroy])
+  end
+
+  def find_group
+    @group = Group.find params[:id]
   end
 end

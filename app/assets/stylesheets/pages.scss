@@ -1,0 +1,35 @@
+// Place all the styles related to the Pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.header-pages {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title-page {
+    width: 100%;
+}
+
+.content-page {
+    margin-top: 10px;
+}
+.content-description {
+
+    width: 99%;
+    height: 91px;
+    resize: none;
+}
+.field-search-page {
+    margin-top: 20px;
+}
+
+.comment-pages {
+    max-height: 400px; 
+}
+
+.header-page-comment {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}

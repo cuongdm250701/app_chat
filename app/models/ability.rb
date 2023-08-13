@@ -13,6 +13,8 @@ class Ability
         can :add_comments, Group
         can :read, Post
         can :add_comments, Post
+        can :read, Page
+        can :add_comments, Page
     end
    end
 end

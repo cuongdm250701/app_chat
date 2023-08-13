@@ -1,0 +1,8 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Page") do |sheet|
+  sheet.add_row ['username','content', 'creation date']
+  @comment_pages.each do |comment_page|
+    sheet.add_row [comment_page.user.username, comment_page.content, comment_page.created_at]
+  end
+end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_31_163810) do
+ActiveRecord::Schema.define(version: 2023_08_09_143529) do
 
   create_table "comment_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "content"
@@ -32,6 +32,16 @@ ActiveRecord::Schema.define(version: 2023_07_31_163810) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "evaluates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "content"
+    t.integer "evaluate_id"
+    t.string "evaluate_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_evaluates_on_user_id"
+  end
+
   create_table "groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -43,6 +53,13 @@ ActiveRecord::Schema.define(version: 2023_07_31_163810) do
     t.bigint "group_id", null: false
     t.index ["group_id", "user_id"], name: "index_groups_users_on_group_id_and_user_id"
     t.index ["user_id", "group_id"], name: "index_groups_users_on_user_id_and_group_id"
+  end
+
+  create_table "pages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -72,5 +89,6 @@ ActiveRecord::Schema.define(version: 2023_07_31_163810) do
   add_foreign_key "comment_posts", "users"
   add_foreign_key "comments", "groups"
   add_foreign_key "comments", "users"
+  add_foreign_key "evaluates", "users"
   add_foreign_key "posts", "groups"
 end

@@ -39,8 +39,8 @@ class PostsController < ApplicationController
 
     def show
         @post = Post.find(params[:id])
-        @comment_posts = @post.comment_posts.order(created_at: :asc)
-        @comment_post = CommentPost.new
+        @comment_posts = @post.evaluates.order(created_at: :asc)
+        @comment_post = Evaluate.new
         respond_to do |format|
             format.html
             format.xlsx do
@@ -57,7 +57,7 @@ class PostsController < ApplicationController
 
     def add_comments
         @post = Post.find(params[:id])
-        @comment_post = @post.comment_posts.build(comment_params)
+        @comment_post = @post.evaluates.build(comment_params)
         @comment_post.user = current_user
         if @comment_post.save
             redirect_to group_post_path(params[:group_id], params[:id]), notice: 'Comment was successfully.'
@@ -70,7 +70,7 @@ class PostsController < ApplicationController
     private
 
     def comment_params
-        params.require(:comment_post).permit(:content)
+        params.require(:evaluate).permit(:content)
     end
 
     def post_params

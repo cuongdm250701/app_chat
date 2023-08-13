@@ -1,0 +1,29 @@
+<%= link_to "Back to list Page", pages_path %>
+
+<div>
+     <h1> <%= @page.title %> </h1>
+     <p> <%= @page.content %> </p>
+</div>
+
+<div>
+     <div class="header-page-comment">
+          <h3> Comments </h3>
+          <%= link_to 'Export file', page_path(format: :xlsx), target: :_blank %>
+     </div>
+     <div class="comment-pages">
+         <% @comment_pages.each do |comment_page| %>
+               <h6 class="other"> username: <%= comment_page.user.username %> </h6>
+               <p class="other-content"> 
+                    <%= comment_page.content %> 
+               </p>
+          <% end %>
+     </div>
+</div>
+
+<div>
+     <h5> Add comment </h5>
+     <%= form_for @comment_page, url: add_comments_page_path(params[:id]), method: :post do |f| %>
+          <%= f.text_field :content, placeholder: 'Enter your comment' %>
+          <%= f.submit "Submit" %>
+     <% end %>
+</div>

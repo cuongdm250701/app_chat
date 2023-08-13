@@ -1,0 +1,14 @@
+<%= link_to "Back to list pages", pages_path %>
+<h5> Create Page </h5>
+
+<div>
+    <%= form_for @page, url: pages_path, method: :post do |f| %>
+        <div class='title-page'>
+            <%= f.text_field :title, placeholder: 'Enter your title' %>
+        </div>
+        <div class='content-page'>
+            <%= f.text_area :content, placeholder: 'Enter your content', class: 'content-description' %>
+        </div>
+        <%= f.submit "Submit" %>
+     <% end %>   
+</div>

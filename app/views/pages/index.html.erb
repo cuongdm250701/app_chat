@@ -1,0 +1,32 @@
+<%= link_to "Back to Home", root_path %>
+
+<div class='header-pages'>
+    <h1>List Page</h1>
+    <%= link_to "New Page", new_page_path %>
+</div>
+
+<div>
+    <div class='field-search-page'>
+        <%= search_form_for @q, url: pages_path do |f| %>
+            <%= f.search_field :title_or_content_cont, placeholder: 'Enter your title or content' %>
+            <%= f.submit "Search!" %>
+        <% end %>
+    </div>
+    <ul>
+        <% @pages.each do |page| %>
+            <li class=""> 
+                <%= link_to "#{page.title}", page_path(page.id) %>
+                <% if current_user&.admin? %>
+                    <%= link_to "Edit", edit_page_path(page.id) %>
+                    <%= 
+                        link_to "Delete", 
+                        page_path(page.id),
+                        method: :delete,
+                        data: { confirm: "Are you sure you want to delete this page?" } 
+                    %>
+                <% end %>
+            </li>
+            <%= paginate @pages %>
+        <% end %>
+    </ul>
+</div>

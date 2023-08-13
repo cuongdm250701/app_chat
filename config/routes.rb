@@ -25,4 +25,10 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  resources :pages do 
+    member do
+      post 'add_comments'
+    end
+  end
 end

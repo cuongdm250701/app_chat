@@ -62,4 +62,5 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   config.hosts << "4f83-27-76-100-182.ngrok-free.app"
+  config.middleware.use IpRestrictMiddleware
 end

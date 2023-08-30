@@ -1,0 +1,10 @@
+<%= link_to "Back to page detail", page_path(@page_id) %>
+
+<div>
+    <%= form_for @receiver, url: send_mail_page_path, method: :post do |f| %>
+        <div>
+            <%= f.email_field :receiver, placeholder: 'Enter your friend' %>
+        </div>
+        <%= f.submit "Submit" %>
+     <% end %>   
+</div>

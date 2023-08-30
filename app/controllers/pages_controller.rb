@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
     before_action :authenticate_user!
-    before_action :find_page, only: [:edit, :update, :destroy, :show, :add_comments]
+    before_action :find_page, only: [:edit, :update, :destroy, :show, :add_comments, :send_mail]
     load_and_authorize_resource
 
     def index
@@ -58,6 +58,17 @@ class PagesController < ApplicationController
       end
     end
 
+    def receiver_mail
+      @page_id = params[:id]
+      @receiver = ''
+    end
+
+    def send_mail
+      receiver = params[:receiver]
+      PagesMailer.send_mail(@page, receiver).deliver
+      redirect_to page_path(params[:id]), notice: 'Sended mail'
+    end
+
 
     private
 
@@ -72,4 +83,5 @@ class PagesController < ApplicationController
     def find_page
       @page = Page.find params[:id]
     end
+
 end

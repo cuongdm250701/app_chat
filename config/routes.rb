@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   resources :pages do 
     member do
       post 'add_comments'
+      get 'receiver_mail'
+      post 'send_mail'
     end
   end
 end

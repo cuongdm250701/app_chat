@@ -4,7 +4,7 @@
      <h1> <%= @page.title %> </h1>
      <p> <%= @page.content %> </p>
 </div>
-
+<%= link_to "Send to friends via email", receiver_mail_page_path %>
 <div>
      <div class="header-page-comment">
           <h3> Comments </h3>

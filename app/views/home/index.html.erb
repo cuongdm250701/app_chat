@@ -1,6 +1,9 @@
 <div class='header'>
     <h1>Home</h1>
-    <%= link_to "Log out", destroy_user_session_path, method: :delete, class:"btn-log-out" %>
+    <div>
+       <%= link_to "Change Password", profile_change_password_path %>
+       <%= link_to "Log out", destroy_user_session_path, method: :delete, class:"btn-log-out" %>
+    </div>
 </div>
 
 <p>List Service</p>

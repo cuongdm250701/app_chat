@@ -38,7 +38,7 @@ class User < ApplicationRecord
     return if !@group_ids
     group_counts = Group.where(id: group_ids).joins(:users).group('groups.id').count
     @group_ids.each do |group_id|
-      if group_counts[group_id.to_i] >= 5
+      if group_counts[group_id.to_i] && group_counts[group_id.to_i] >= 5
         errors.add(:Group, "Exists group has full size")
       end
     end

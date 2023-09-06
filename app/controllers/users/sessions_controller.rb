@@ -2,7 +2,7 @@
 
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
-
+  before_action :check_active_account, only: [:create]
   # GET /resource/sign_in
   def new
     super
@@ -23,10 +23,14 @@ class Users::SessionsController < Devise::SessionsController
     signin_path
   end
 
-  # protected
+  protected
 
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_in_params
-  #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
-  # end
+
+ 
+  def check_active_account
+    user = User.where(email: params[:user][:login]).or(User.where(username: params[:user][:login]))
+    if user[0].deactived
+      raise StandardError
+    end
+  end
 end

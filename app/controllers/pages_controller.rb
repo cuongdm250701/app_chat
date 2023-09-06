@@ -5,6 +5,7 @@ class PagesController < ApplicationController
 
     def index
       @q = Page.ransack(params[:q])
+      puts "Running my Ruby scrip"
       @pages = @q.result().page(params[:page]).per(10)
     end
 

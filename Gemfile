@@ -39,7 +39,9 @@ gem 'kaminari'
 gem "cocoon"
 gem 'caxlsx'
 gem 'caxlsx_rails'
-gem 'pry-rails', :group => :development
+gem 'sidekiq', '~> 6.5.5'
+gem 'redis-namespace'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -51,6 +53,7 @@ gem 'dotenv-rails', groups: [:development, :test]
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
+  gem 'pry-rails'
   gem 'listen', '~> 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'

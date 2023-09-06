@@ -2,9 +2,11 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get "home" => 'home#index'
   get 'users', to: 'users#index', as: 'users'
+  get 'profile/change_password', to: 'users#change_password'
+  put 'profile/update_password', to: 'users#update_password'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
   }
   as :user do
     get "signin" => "users/sessions#new"

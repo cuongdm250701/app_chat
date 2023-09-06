@@ -9,6 +9,8 @@ class Ability
         can :manage, :all
       else
         can :create, User
+        can :change_password, User
+        can :update_password, User
         can :read, Group
         can :add_comments, Group
         can :read, Post

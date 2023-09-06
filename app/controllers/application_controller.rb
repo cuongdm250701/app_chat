@@ -3,10 +3,13 @@ class ApplicationController < ActionController::Base
 
     before_action :configure_permitted_parameters, if: :devise_controller?
 
-   rescue_from CanCan::AccessDenied do |execption|
+    rescue_from CanCan::AccessDenied do |execption|
        redirect_to root_path, alert: "Permission denied"
-   end
-   
+    end
+
+    rescue_from StandardError, with: :handle_error
+
+
     protected
 
     def configure_permitted_parameters
@@ -21,5 +24,11 @@ class ApplicationController < ActionController::Base
         devise_parameter_sanitizer.permit(:account_update,
            keys: [:username, :name, :email, :password_confirmation, :current_password]
         )
+    end
+
+    private
+
+    def handle_error(exception)
+        redirect_to new_user_session_path, notice: "Account was deactived"
     end
 end
